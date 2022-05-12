@@ -10,7 +10,6 @@ var (
 )
 
 func StringSum(input string, input2 string) (output string, err error) {
-	//add 2 strings together and return the result as a string  if the input is empty, return an error
 	if input == "" {
 		err = errorEmptyInput
 		return
