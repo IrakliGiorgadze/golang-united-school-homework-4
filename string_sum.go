@@ -9,22 +9,16 @@ var (
 	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
 )
 
-func StringSum(input string, input2 string) (output string, err error) {
+func StringSum(input string) (output string, err error) {
 	if input == "" {
-		err = errorEmptyInput
-		return
+		return "", errorEmptyInput
 	}
-	if input2 == "" {
-		err = errorEmptyInput
-		return
+	if len(input)%2 != 0 {
+		return "", errorNotTwoOperands
 	}
-	if len(input) != len(input2) {
-		err = errorNotTwoOperands
-		return
+	var sum int
+	for i := 0; i < len(input); i += 2 {
+		sum += int(input[i]) + int(input[i+1])
 	}
-	for i := 0; i < len(input); i++ {
-		output += string(input[i] + input2[i])
-	}
-
-	return "", nil
+	return string(sum), nil
 }
