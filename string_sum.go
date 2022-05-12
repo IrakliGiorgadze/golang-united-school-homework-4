@@ -13,12 +13,16 @@ func StringSum(input string) (output string, err error) {
 	if input == "" {
 		return "", errorEmptyInput
 	}
+
 	if len(input)%2 != 0 {
 		return "", errorNotTwoOperands
 	}
-	var sum int
+
+	output = ""
 	for i := 0; i < len(input); i += 2 {
-		sum += int(input[i]) + int(input[i+1])
+		output += input[i : i+2]
 	}
-	return string(sum), nil
+
+	return output, nil
+
 }
