@@ -3,9 +3,9 @@ package string_sum
 import (
 	"errors"
 	"fmt"
- 	"strconv"
+	"strconv"
 	"strings"
- )
+)
 
 var (
 	errorEmptyInput     = errors.New("input is empty")
@@ -65,30 +65,31 @@ var (
 // }
 
 func StringSum(input string) (output string, err error) {
-
 	if input == "" {
-		return "", fmt.Errorf(errorEmptyInput.Error())
+		return "", fmt.Errorf("%w", errorEmptyInput)
 	}
 
-	//check whitespace in the input string
+	//trim whitespace from the input and return error nil
 	input = strings.TrimSpace(input)
-
-	// 
+	if input == "" {
+		return input, nil
+	}
 
 	if strings.Count(input, "+") > 1 {
-		return "", errorNotTwoOperands
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
 	if strings.Count(input, "+") == 0 {
-		return "", errorNotTwoOperands
+		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
 
 	if strings.ContainsAny(input[:strings.Index(input, "+")], "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") {
-		return "", &strconv.NumError{Func: "Atoi", Num: input[:strings.Index(input, "+")], Err: strconv.ErrSyntax}
+		return "", fmt.Errorf("%w", &strconv.NumError{Func: "Atoi", Num: input[:strings.Index(input, "+")], Err: strconv.ErrSyntax})
+
 	}
 
 	if strings.ContainsAny(input[strings.Index(input, "+")+1:], "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") {
-		return "", &strconv.NumError{Func: "Atoi", Num: input[strings.Index(input, "+")+1:], Err: strconv.ErrSyntax}
+		return "", fmt.Errorf("%w", &strconv.NumError{Func: "Atoi", Num: input[strings.Index(input, "+")+1:], Err: strconv.ErrSyntax})
 	}
 
 	firstOperand, err := strconv.Atoi(input[:strings.Index(input, "+")])
@@ -106,5 +107,4 @@ func StringSum(input string) (output string, err error) {
 	output = strconv.Itoa(sum)
 
 	return output, nil
-
 }
