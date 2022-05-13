@@ -2,6 +2,7 @@ package string_sum
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 )
 
@@ -10,14 +11,16 @@ var (
 	errorNotTwoOperands = errors.New("expecting two operands, but received more or less")
 )
 
+
+
 func StringSum(input string) (output string, err error) {
 	if input == "" {
 		return "", errorEmptyInput
 	}
 
-	if len(input)%2 != 0 {
-		return "", errorNotTwoOperands
-	}
+	// if len(input)%2 != 0 {
+	// 	return "", errorNotTwoOperands
+	// }
 
 	if input[0] == '-' {
 		return "", errorNotTwoOperands
@@ -29,21 +32,33 @@ func StringSum(input string) (output string, err error) {
 
 	runes := []rune(input)
 
+	fmt.Println("runes:", runes)
+
 	chars := make([]string, len(runes))
+
+	fmt.Println("chars:", chars)
 
 	for i, r := range runes {
 		chars[i] = string(r)
 	}
 
-	sum := 0
-	for _, c := range chars {
-		num, err := strconv.Atoi(c)
-		if err != nil {
-			return "", err
-		}
-		sum += num
+	fmt.Println("chars:", chars)
+
+	//add the first two numbers 
+	firstNumber, err := strconv.Atoi(chars[0])
+	if err != nil {
+		return "", err
+	}
+	secondNumber, err := strconv.Atoi(chars[2])
+	if err != nil {
+		return "", err
 	}
 
+	sum := firstNumber + secondNumber
+	fmt.Println("sum:", sum)
+
+	//return the sum
 	return "", nil
 
 }
+
