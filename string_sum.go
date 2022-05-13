@@ -71,35 +71,20 @@ func StringSum(input string) (output string, err error) {
 	if input == "" {
 		return "", errorEmptyInput
 	}
-
-	if strings.Count(input, "+") > 1 {
+	operands := strings.Split(input, "+")
+	if len(operands) != 2 {
 		return "", errorNotTwoOperands
 	}
-
-	if strings.Count(input, "+") == 0 {
-		return "", errorNotTwoOperands
-	}
-
-	if strings.ContainsAny(input[:strings.Index(input, "+")], "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") {
-		return "", &strconv.NumError{Func: "Atoi", Num: input[:strings.Index(input, "+")], Err: strconv.ErrSyntax}
-	}
-
-	if strings.ContainsAny(input[strings.Index(input, "+")+1:], "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") {
-		return "", &strconv.NumError{Func: "Atoi", Num: input[strings.Index(input, "+")+1:], Err: strconv.ErrSyntax}
-	}
-
-	firstOperand, err := strconv.Atoi(input[:strings.Index(input, "+")])
+	first, err := strconv.Atoi(operands[0])
 	if err != nil {
-		return "", fmt.Errorf(err.Error())
+		return "", err
 	}
-
-	secondOperand, err := strconv.Atoi(input[strings.Index(input, "+")+1:])
+	second, err := strconv.Atoi(operands[1])
 	if err != nil {
-		return "", fmt.Errorf(err.Error())
+		return "", err
 	}
 
-	sum := firstOperand + secondOperand
-
+	sum := first + second
 	output = strconv.Itoa(sum)
 
 	return output, nil
