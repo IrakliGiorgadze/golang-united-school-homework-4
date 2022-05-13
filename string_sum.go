@@ -66,13 +66,12 @@ var (
 
 func StringSum(input string) (output string, err error) {
 	if input == "" {
-		return "", fmt.Errorf("%w", errorEmptyInput)
+		return "", nil
 	}
 
-	//trim whitespace from the input and return error nil
 	input = strings.TrimSpace(input)
 	if input == "" {
-		return input, nil
+		return "", nil
 	}
 
 	if strings.Count(input, "+") > 1 {
