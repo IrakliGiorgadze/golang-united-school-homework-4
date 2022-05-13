@@ -19,6 +19,14 @@ func StringSum(input string) (output string, err error) {
 		return "", errorNotTwoOperands
 	}
 
+	if input[0] == '-' {
+		return "", errorNotTwoOperands
+	}
+
+	if input[1] == ' ' {
+		return "", errorNotTwoOperands
+	}
+
 	runes := []rune(input)
 
 	chars := make([]string, len(runes))
