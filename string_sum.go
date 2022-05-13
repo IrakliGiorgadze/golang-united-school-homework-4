@@ -2,6 +2,8 @@ package string_sum
 
 import (
 	"errors"
+	"strconv"
+	"unicode"
 )
 
 var (
@@ -10,19 +12,27 @@ var (
 )
 
 func StringSum(input string) (output string, err error) {
-	if input == "" {
+	runes := []rune(input)
+
+	if len(runes) == 0 {
 		return "", errorEmptyInput
 	}
 
-	if len(input)%2 != 0 {
-		return "", errorNotTwoOperands
+	for _, r := range runes {
+		if !unicode.IsDigit(r) {
+			return "", errorNotTwoOperands
+		}
 	}
 
-	output = ""
-	for i := 0; i < len(input); i += 2 {
-		output += input[i : i+2]
+	integers := make([]int, len(runes))
+	for i, r := range runes {
+		integers[i], _ = strconv.Atoi(string(r))
 	}
 
-	return output, nil
+	sum := 0
+	for _, i := range integers {
+		sum += i
+	}
 
+	return strconv.Itoa(sum), nil
 }
