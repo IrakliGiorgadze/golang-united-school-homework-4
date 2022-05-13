@@ -44,6 +44,6 @@ func StringSum(input string) (output string, err error) {
 		sum += num
 	}
 
-	return strconv.Itoa(sum), nil
+	return "", nil
 
 }
