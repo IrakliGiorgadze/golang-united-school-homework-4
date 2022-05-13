@@ -2,6 +2,7 @@ package string_sum
 
 import (
 	"errors"
+
 	"strconv"
 	"strings"
 )
@@ -68,6 +69,12 @@ func StringSum(input string) (output string, err error) {
 	if input == "" {
 		return "", errorEmptyInput
 	}
+
+	//check if input is contains characters other than + and - return empty string and error from strconv package
+	if strings.ContainsAny(input, "+-") {
+		return "", &strconv.NumError{Func: "Atoi", Num: input, Err: strconv.ErrSyntax}
+	}
+
 	if strings.Count(input, "+") != 1 {
 		return "", errorNotTwoOperands
 	}
