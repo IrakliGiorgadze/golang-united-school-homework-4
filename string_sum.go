@@ -83,12 +83,12 @@ func StringSum(input string) (output string, err error) {
 	}
 
 	if strings.ContainsAny(input[:strings.Index(input, "+")], "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") {
-		return "", fmt.Errorf("%w", &strconv.NumError{Func: "Atoi", Num: input[:strings.Index(input, "+")], Err: strconv.ErrSyntax})
+		return "", nil
 
 	}
 
 	if strings.ContainsAny(input[strings.Index(input, "+")+1:], "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") {
-		return "", fmt.Errorf("%w", &strconv.NumError{Func: "Atoi", Num: input[strings.Index(input, "+")+1:], Err: strconv.ErrSyntax})
+		return "", nil
 	}
 
 	firstOperand, err := strconv.Atoi(input[:strings.Index(input, "+")])
