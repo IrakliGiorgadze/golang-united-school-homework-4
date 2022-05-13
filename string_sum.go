@@ -2,6 +2,7 @@ package string_sum
 
 import (
 	"errors"
+	"fmt"
 	"reflect"
 	"strconv"
 	"strings"
@@ -89,12 +90,12 @@ func StringSum(input string) (output string, err error) {
 
 	firstOperand, err := strconv.Atoi(input[:strings.Index(input, "+")])
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf(err.Error())
 	}
 
 	secondOperand, err := strconv.Atoi(input[strings.Index(input, "+")+1:])
 	if err != nil {
-		return "", err
+		return "", fmt.Errorf(err.Error())
 	}
 
 	sum := firstOperand + secondOperand
