@@ -64,6 +64,7 @@ var (
 // }
 
 func StringSum(input string) (output string, err error) {
+	input = strings.TrimSpace(input)
 	if input == "" {
 		return "", errorEmptyInput
 	}
@@ -79,6 +80,11 @@ func StringSum(input string) (output string, err error) {
 	if err != nil {
 		return "", err
 	}
-	return strconv.Itoa(first + second), nil
+
+	sum := first + second
+	//convert sum to string
+	output = strconv.Itoa(sum)
+
+	return output, nil
 
 }
