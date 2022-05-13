@@ -3,9 +3,9 @@ package string_sum
 import (
 	"errors"
 	"fmt"
-	"strconv"
+ 	"strconv"
 	"strings"
-)
+ )
 
 var (
 	errorEmptyInput     = errors.New("input is empty")
@@ -67,8 +67,13 @@ var (
 func StringSum(input string) (output string, err error) {
 
 	if input == "" {
-		return "", errorEmptyInput
+		return "", fmt.Errorf(errorEmptyInput.Error())
 	}
+
+	//check whitespace in the input string
+	input = strings.TrimSpace(input)
+
+	// 
 
 	if strings.Count(input, "+") > 1 {
 		return "", errorNotTwoOperands
