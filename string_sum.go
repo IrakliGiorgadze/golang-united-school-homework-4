@@ -3,6 +3,7 @@ package string_sum
 import (
 	"errors"
 	"fmt"
+	"log"
 	"strconv"
 	"strings"
 	"unicode"
